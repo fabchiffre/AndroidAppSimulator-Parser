@@ -1,0 +1,62 @@
+<project name="AndroidAppSimulation-Parser" default="compile" basedir=".">
+
+
+
+
+  <property name="src.dir"      value="${basedir}/src"/>
+  <property name="build.dir"	value="${basedir}/bin"/>
+  <property name="dist.dir"	value="${basedir}/dist"/>
+  <property name="app.name"	value="SimulationParser"/>
+<property name="app.version" value="1.0"/>
+
+  <path id="compile.classpath"/>
+
+
+
+  <target name="all" depends="clean,compile"/>
+
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+  </target>
+
+
+  <target name="compile"
+   description="Compile Java sources">
+
+    <mkdir    dir="${build.dir}/classes"/>
+    <javac srcdir="${src.dir}"
+          destdir="${build.dir}">
+        <classpath refid="compile.classpath"/>
+    </javac>
+  </target>
+
+
+
+<!-- ==================== Dist Target ===================================== -->
+
+  <target name="dist" depends="compile"
+   description="Create binary distribution">
+
+    <!-- Create application JAR file -->
+    <jar jarfile="${dist.dir}/${app.name}-${app.version}.jar"
+         basedir="${build.dir}"/>
+  </target>
+
+
+<!-- ==================== Javadoc Target ================================== -->
+
+  <target name="javadoc" depends="compile"
+   description="Create Javadoc API documentation">
+
+    <mkdir          dir="${dist.home}/docs/api"/>
+    <javadoc sourcepath="${src.home}"
+                destdir="${dist.home}/docs/api"
+           packagenames="*">
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+
+  </target>
+</project>
+
