@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<simulationList>
+	<simulation>
+		<name>Mail Operation</name>
+		<className>edu.performance.test.mailoperation.MailOperationActivity</className>
+		<maxTime>170000</maxTime>
+		<intLevel>100</intLevel>
+		<stringLevel index="4">***@ymail.com</stringLevel>
+		<stringLevel index="5">Text mail</stringLevel>
+		<stringLevel index="1">/data/data/edu.performance.test/app_performanceDir/tiny_g.txt</stringLevel>
+	</simulation>
+</simulationList>

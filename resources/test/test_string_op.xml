@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<simulationList>
+	<simulation>
+		<name>String Operation</name>
+		<className>edu.performance.test.stringoperation.StringOperationActivity</className>
+		<maxTime>170000</maxTime>
+		<intLevel>1</intLevel>
+		<stringLevel index="2">Searchable</stringLevel>
+		<stringArrayLevel>Elememt 1;;Element 2;;Element 3</stringArrayLevel>
+	</simulation>
+</simulationList>

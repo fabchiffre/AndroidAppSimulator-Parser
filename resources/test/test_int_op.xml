@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<simulationList>
+	<simulation>
+		<name>Integer Operation</name>
+		<className>edu.performance.test.integeroperation.IntegerOperationActivity</className>
+		<maxTime>170000</maxTime>
+		<intLevel>100</intLevel>
+	</simulation>
+</simulationList>

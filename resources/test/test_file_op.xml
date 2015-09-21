@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<simulationList>
+	<simulation>
+		<name>File Operation</name>
+		<className>edu.performance.test.filesequentialoperation.FileSequentialOperationActivity</className>
+		<intLevel>1</intLevel>
+		<maxTime>400000</maxTime>
+		<stringLevel index="1">/data/data/edu.performance.test/app_performanceDir/small.txt</stringLevel> 
+		<stringLevel index="3">Stretch...</stringLevel>
+	</simulation>
+</simulationList>

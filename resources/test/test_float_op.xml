@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<simulationList>
+	<simulation>
+		<name>Float Operation</name>
+		<className>edu.performance.test.integeroperation.FloatOperationActivity</className>
+		<maxTime>700000</maxTime>
+		<doubleLevel>5009</doubleLevel>
+	</simulation>
+</simulationList>
