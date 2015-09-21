@@ -49,9 +49,9 @@ public class SimulationNative implements SimulationInterface {
 		parameters.put(INT_LEVEL, level);
 	}
 
-	public int getMaxTime() {
+	public long getMaxTime() {
 		if (hasMaxTimeParameter())
-			return (int) parameters.get(MAX_TIME);
+			return (Long) parameters.get(MAX_TIME);
 		else {
 			return 0;
 		}

@@ -5,7 +5,7 @@ public interface SimulationInterface {
 	public final static String NAME = "name";
 	public final static String CLASS_NAME = "className";
 	public final static String MAX_TIME = "maxTime";
-	public final static String INT_LEVEL = "level";
+	public final static String INT_LEVEL = "intLevel";
 	public final static String BATTERY_TEST = "batteryTest";
 	public final static String BATTERY_TEST_LEVEL = "batteryTestLevel";
 	public final static String DOUBLE_LEVEL = "doubleLevel";
@@ -34,7 +34,7 @@ public interface SimulationInterface {
 
 	public void setIntLevel(int level);
 
-	public int getMaxTime();
+	public long getMaxTime();
 
 	public boolean hasMaxTimeParameter();
 
