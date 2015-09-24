@@ -1,6 +1,7 @@
 package edu.performance.simulation.model;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
 
 /*
  * This class contains methods to:
@@ -18,12 +20,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
  * Also, this class uses the StAX API to read and write a XML file.
  */
 public class SimulationUtil {
-
+	private static final String NAMESPACE = "";
+	
 	/*
 	 * Parse the simulation file.
 	 */
 	public static List<SimulationInterface> readSimulationFile(SimulationFactory simulationFactory, InputStream xmlFile)
 			throws XmlPullParserException, IOException {
+		
 		List<SimulationInterface> simulationList = new ArrayList<>();
 		SimulationInterface currentSimulation = null; // TODO Watch for null
 														// pointers
@@ -106,74 +110,81 @@ public class SimulationUtil {
 	 */
 	// TODO Make a temporary folder to write this
 	public static void createAndroidSimulationFile(List<SimulationInterface> simulationList, File resultantFile)
-			throws IOException {
-		/*
-		 * XMLOutputFactory factory = XMLOutputFactory.newInstance();
-		 * 
-		 * FileWriter fileWriter = new FileWriter(resultantFile);
-		 * XMLStreamWriter writer = factory.createXMLStreamWriter(fileWriter);
-		 * 
-		 * writer.writeStartDocument();
-		 * writer.writeStartElement("simulationList"); for (SimulationInterface
-		 * aSimulation : simulationList) {
-		 * writer.writeStartElement("simulation");
-		 * 
-		 * writer.writeStartElement(SimulationInterface.NAME);
-		 * writer.writeCharacters(aSimulation.getName());
-		 * writer.writeEndElement();
-		 * 
-		 * writer.writeStartElement(SimulationInterface.CLASS_NAME);
-		 * writer.writeCharacters(aSimulation.getClassName());
-		 * writer.writeEndElement();
-		 * 
-		 * if (aSimulation.hasMaxTimeParameter()) {
-		 * writer.writeStartElement(SimulationInterface.MAX_TIME);
-		 * writer.writeCharacters(Long.toString(aSimulation.getMaxTime()));
-		 * writer.writeEndElement(); }
-		 * 
-		 * if (aSimulation.hasIntLevelParameter()) {
-		 * writer.writeStartElement(SimulationInterface.INT_LEVEL);
-		 * writer.writeCharacters(Integer.toString(aSimulation.getIntLevel()));
-		 * writer.writeEndElement(); }
-		 * 
-		 * if (aSimulation.hasDoubleLevelParameter()) {
-		 * writer.writeStartElement(SimulationInterface.DOUBLE_LEVEL);
-		 * writer.writeCharacters(Double.toString(aSimulation.getDoubleLevel()))
-		 * ; writer.writeEndElement(); }
-		 * 
-		 * if (aSimulation.hasBatteryTestParameter()) {
-		 * writer.writeStartElement(SimulationInterface.BATTERY_TEST);
-		 * writer.writeCharacters(Boolean.toString(aSimulation.isBatteryTest()))
-		 * ; writer.writeEndElement(); }
-		 * 
-		 * if (aSimulation.hasBatteryTestLevelParameter()) {
-		 * writer.writeStartElement(SimulationInterface.BATTERY_TEST_LEVEL);
-		 * writer.writeCharacters(Integer.toString(aSimulation.
-		 * getBatteryTestLevel())); writer.writeEndElement(); }
-		 * 
-		 * // TODO adapt to the max number of string param for (int i = 0; i <
-		 * 100; ++i) {
-		 * writer.writeStartElement(SimulationInterface.STRING_LEVEL);
-		 * writer.writeAttribute("index", Integer.toString(i));
-		 * writer.writeCharacters(aSimulation.getStringLevel(i));
-		 * writer.writeEndElement(); }
-		 * 
-		 * if (aSimulation.hasStringArrayLevel()) {
-		 * writer.writeStartElement(SimulationInterface.STRING_ARRAY_LEVEL); for
-		 * (int i = 0; i < aSimulation.getStringArrayLevel().length; i++) {
-		 * writer.writeCharacters(aSimulation.getStringArrayLevel()[i]); if (i
-		 * != aSimulation.getStringArrayLevel().length - 1)
-		 * writer.writeCharacters(";;"); } writer.writeEndElement(); }
-		 * 
-		 * writer.writeEndElement();
-		 * 
-		 * writer.flush(); }
-		 * 
-		 * writer.writeEndDocument();
-		 * 
-		 * writer.close();
-		 * 
-		 * System.out.println("file written");
-		 */
+			throws IOException, XmlPullParserException {
+
+		XmlPullParserFactory factory = XmlPullParserFactory
+				.newInstance(System.getProperty(XmlPullParserFactory.PROPERTY_NAME), null);
+		XmlSerializer serializer = factory.newSerializer();
+		serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+		serializer.setOutput(new FileWriter(resultantFile));
+		serializer.startDocument(null, null);
+
+		serializer.startTag(NAMESPACE, "simulationList");
+		for (SimulationInterface simu : simulationList) {
+			serializer.startTag(NAMESPACE, "simulation");
+			
+			serializer.startTag(NAMESPACE, SimulationInterface.NAME);
+			serializer.text(simu.getName());
+			serializer.endTag(NAMESPACE, SimulationInterface.NAME);
+			
+			serializer.startTag(NAMESPACE, SimulationInterface.CLASS_NAME);
+			serializer.text(simu.getClassName());
+			serializer.endTag(NAMESPACE, SimulationInterface.CLASS_NAME);
+			
+			if(simu.hasMaxTimeParameter()) {
+				serializer.startTag(NAMESPACE, SimulationInterface.MAX_TIME);
+				serializer.text(Long.toString(simu.getMaxTime()));
+				serializer.endTag(NAMESPACE, SimulationInterface.MAX_TIME);
+			}
+			
+			
+			if(simu.hasBatteryTestParameter()) {
+				serializer.startTag(NAMESPACE, SimulationInterface.BATTERY_TEST);
+				serializer.text(Boolean.toString(simu.isBatteryTest()));
+				serializer.endTag(NAMESPACE, SimulationInterface.BATTERY_TEST);
+			}
+			
+			if(simu.hasBatteryTestLevelParameter()) {
+				serializer.startTag(NAMESPACE, SimulationInterface.BATTERY_TEST_LEVEL);
+				serializer.text(Integer.toString(simu.getBatteryTestLevel()));
+				serializer.endTag(NAMESPACE, SimulationInterface.BATTERY_TEST_LEVEL);
+			}
+			
+			if(simu.hasIntLevelParameter()) {
+				serializer.startTag(NAMESPACE, SimulationInterface.INT_LEVEL);
+				serializer.text(Integer.toString(simu.getIntLevel()));
+				serializer.endTag(NAMESPACE, SimulationInterface.INT_LEVEL);
+			}
+			
+			if(simu.hasDoubleLevelParameter()) {
+				serializer.startTag(NAMESPACE, SimulationInterface.DOUBLE_LEVEL);
+				serializer.text(Double.toString(simu.getDoubleLevel()));
+				serializer.endTag(NAMESPACE, SimulationInterface.DOUBLE_LEVEL);
+			}
+			
+			for (int i = 0; i < 10; ++i) {
+				if(simu.hasStringLevelParameter(i)) {
+					serializer.startTag(NAMESPACE, SimulationInterface.STRING_LEVEL);
+					serializer.attribute(NAMESPACE, "index", Integer.toString(i));
+					serializer.text(simu.getStringLevel(i));
+					serializer.endTag(NAMESPACE, SimulationInterface.STRING_LEVEL);
+				}
+			}
+			
+			if (simu.hasStringArrayLevel()) {
+				serializer.startTag(NAMESPACE, SimulationInterface.STRING_ARRAY_LEVEL);
+				for (int i = 0; i < simu.getStringArrayLevel().length; i++) {
+					serializer.text(simu.getStringArrayLevel()[i]);
+					if (i != simu.getStringArrayLevel().length - 1)
+						serializer.text(";;");
+				}
+				serializer.endTag(NAMESPACE, SimulationInterface.STRING_ARRAY_LEVEL);
+			}
+
+			serializer.endTag(NAMESPACE, "simulation");
+		}
+
+		serializer.endTag(NAMESPACE, "simulationList");
+		serializer.endDocument();
 	}
 }
