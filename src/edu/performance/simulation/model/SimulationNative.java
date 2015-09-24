@@ -154,4 +154,8 @@ public class SimulationNative implements SimulationInterface {
 	public void setStringLevel(String level, int index) {
 		parameters.put(STRING_LEVEL + index, level);
 	}
+
+	public String toString() {
+		return getName();
+	}
 }
