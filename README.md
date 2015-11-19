@@ -1,7 +1,6 @@
 # AndroidAppSimulator-Parser
 Early Performance Analysis for Android Applications - Parser for simulation list
 
-
 The development of mobile applications is guided
 by the careful attention to Non-Functional Requirements (NFRs),
 where a good user experience is the ultimate goal. Nevertheless,
@@ -20,7 +19,8 @@ find the best trade-off between cost and performance even before
 system implementation.
 
 The current project is separated in two parts :
--An Android application allowing to simulate different kind of application (https://github.com/vicenteluchi/TestLibrary)
--A desktop Java Fx application allowing to generate an xml file listing the operation to simulate. (https://github.com/vicenteluchi/AndroidAppSimulator)
+-An [Android application](https://github.com/vicenteluchi/TestLibrary) allowing to simulate different kind of application.
 
-The AndroidAppSimulator-Parser repository corresponds to the parser used to write and read the list of operations to simulate.
+-A [desktop Java Fx application](https://github.com/vicenteluchi/AndroidAppSimulator) allowing to generate an xml file listing the operation to simulate. 
+
+The AndroidAppSimulator-Parser repository corresponds to the parser used to write and read the list of operations to simulate and is used in the both parts.
