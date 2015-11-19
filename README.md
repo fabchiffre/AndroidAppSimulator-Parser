@@ -19,8 +19,7 @@ find the best trade-off between cost and performance even before
 system implementation.
 
 The current project is separated in two parts :
--An [Android application](https://github.com/vicenteluchi/TestLibrary) allowing to simulate different kind of application.
-
--A [desktop Java Fx application](https://github.com/vicenteluchi/AndroidAppSimulator) allowing to generate an xml file listing the operation to simulate. 
+- An [Android application](https://github.com/vicenteluchi/TestLibrary) allowing to simulate different kind of application.
+- A [desktop Java Fx application](https://github.com/vicenteluchi/AndroidAppSimulator) allowing to generate an xml file listing the operation to simulate. 
 
 The AndroidAppSimulator-Parser repository corresponds to the parser used to write and read the list of operations to simulate and is used in the both parts.
